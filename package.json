@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "server": "json-server server.json -w -d 750 -p 3333 -H"
   },
   "dependencies": {
     "react": "^17.0.0",

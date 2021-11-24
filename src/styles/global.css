@@ -11,3 +11,9 @@
     background: rgb(41,46,42);
     background: linear-gradient(173deg, rgba(41,46,42,1) 0%, rgba(139,184,142,1) 35%, rgba(31,125,39,1) 100%);
 }
+
+button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}

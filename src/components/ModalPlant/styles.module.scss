@@ -1,0 +1,40 @@
+.modalContainer {
+  width: 100vw;
+  height: 100vh;
+  background: rgba($color: #000000, $alpha: 0.7);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes slide-bottom {
+    0% {
+      transform: translateY(-100px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+.modalContent {
+  width: 600px;
+  height: 600px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+  button {
+    align-self: flex-end;
+    svg{
+        font-size: 24px;
+    }
+  }
+}

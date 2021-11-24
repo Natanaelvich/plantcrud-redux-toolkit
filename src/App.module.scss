@@ -3,17 +3,16 @@
   height: 100%;
   margin: 0 auto;
   padding-top: 24px;
-  color : #fff;
+  color: #fff;
 
-  h1{
-      margin-bottom: 12px;
-      font-size: 64px;
+  h1 {
+    margin-bottom: 12px;
+    font-size: 64px;
   }
 
   p {
-      font-size: 18px;
+    font-size: 18px;
   }
-
 }
 
 .listPlants {
@@ -26,9 +25,8 @@
   padding: 12px;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-  transition: transform .2s;
-color : #fff;
+  transition: transform 0.2s;
+  color: #fff;
   img {
     width: 150px;
   }
@@ -41,8 +39,8 @@ color : #fff;
     max-width: 250px;
   }
 
-  &:hover{
-    transform: scale(1.1); 
+  &:hover {
+    transform: scale(1.1);
   }
 }
 

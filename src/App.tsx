@@ -1,18 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./App.module.scss";
-import { getPlantsAsync, selectPlants } from "./store/slices/plantsSlice";
+import ModalPlant from "./components/ModalPlant";
+import {
+  getPlantsAsync,
+  Plant,
+  selectPlants,
+} from "./store/slices/plantsSlice";
 
 function App() {
   const plants = useSelector(selectPlants);
   const dispatch = useDispatch();
 
+  const [showModalPlant, setShowModalPlant] = useState(false);
+  const [plantSelected, setPlantSelected] = useState<Plant | undefined>();
+
   useEffect(() => {
     dispatch(getPlantsAsync());
   }, []);
 
-  console.log(plants);
+  function handleOpenModalPlant(plant: Plant) {
+    setPlantSelected(plant);
+    setShowModalPlant(true);
+  }
+
   return (
     <div className="App">
       <main className={styles.contentWrapper}>
@@ -22,14 +34,24 @@ function App() {
 
         <div className={styles.wrapperList}>
           {plants.map((p) => (
-            <div className={styles.listPlants}>
+            <button
+              className={styles.listPlants}
+              onClick={() => handleOpenModalPlant(p)}
+            >
               <img src={p.photo} alt="photo-plant" />
               <strong>{p.name}</strong>
               <p>{p.about}</p>
-            </div>
+            </button>
           ))}
         </div>
       </main>
+
+      {showModalPlant && !!plantSelected && (
+        <ModalPlant
+          handleClose={() => setShowModalPlant(false)}
+          plant={plantSelected}
+        />
+      )}
     </div>
   );
 }

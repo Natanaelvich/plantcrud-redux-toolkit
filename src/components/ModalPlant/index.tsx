@@ -1,5 +1,5 @@
 import React from 'react';
-import {MdClose} from 'react-icons/md'
+import {MdClose, MdDelete, MdEdit} from 'react-icons/md'
 import { Plant } from '../../store/slices/plantsSlice';
 
 import styles from './styles.module.scss'
@@ -18,8 +18,21 @@ const ModalPlant : React.FC<Props> = ({handleClose, plant}) => {
                 </button>
                 <img src={plant.photo} alt="plant=photo" width={100} height={100} />
                 <h1>{plant.name}</h1>
-                <h1>{plant.about}</h1>
-                <h1>{plant.water_tips}</h1>
+
+                <h3>Sobre</h3>
+                <p>{plant.about}</p>
+
+                <h3>Dicas de água</h3>
+                <p>{plant.water_tips}</p>
+
+                <div>
+                    <button>
+                        <MdEdit />
+                    </button>
+                    <button>
+                        <MdDelete />
+                    </button>
+                </div>
             </div>
         </div>
     );

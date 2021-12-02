@@ -12,10 +12,12 @@ export type Plant = {
 
 export interface plantsState {
   plants: Plant[];
+  loadingDelete: boolean;
 }
 
 const initialState: plantsState = {
   plants: [],
+  loadingDelete: false,
 };
 
 export const plantsSlice = createSlice({
@@ -30,10 +32,14 @@ export const plantsSlice = createSlice({
         (p) => p.id !== action.payload.plantId
       );
     },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loadingDelete = action.payload;
+    },
   },
 });
 
-export const { addPlants, deletePlant } = plantsSlice.actions;
+export const { addPlants, deletePlant,setLoading } = plantsSlice.actions;
+
 export const deletePlantAsync =
   (plantId: number) => async (dispatch: AppDispatch) => {
     try {
@@ -56,6 +62,6 @@ export const getPlantsAsync = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const selectPlants = (state: RootState) => state.plants.plants;
+export const selectPlants = (state: RootState) => state.plants;
 
 export default plantsSlice.reducer;

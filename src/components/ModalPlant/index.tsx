@@ -1,7 +1,12 @@
 import React from "react";
 import { MdClose, MdDelete, MdEdit } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { deletePlantAsync, Plant } from "../../store/slices/plantsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deletePlantAsync,
+  Plant,
+  selectPlants,
+} from "../../store/slices/plantsSlice";
+import LoadingCircle from "../LoadingCircle";
 
 import styles from "./styles.module.scss";
 
@@ -12,9 +17,10 @@ type Props = {
 
 const ModalPlant: React.FC<Props> = ({ handleClose, plant }) => {
   const dispatch = useDispatch();
+  const { loadingDelete } = useSelector(selectPlants);
 
   function handleDeletePlant() {
-    dispatch(deletePlantAsync(plant.id,handleClose));
+    dispatch(deletePlantAsync(plant.id, handleClose));
   }
 
   return (
@@ -37,7 +43,7 @@ const ModalPlant: React.FC<Props> = ({ handleClose, plant }) => {
             <MdEdit />
           </button>
           <button onClick={handleDeletePlant}>
-            <MdDelete />
+            {loadingDelete ? <LoadingCircle /> : <MdDelete />}
           </button>
         </div>
       </div>

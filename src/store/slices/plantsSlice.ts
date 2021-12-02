@@ -41,11 +41,13 @@ export const plantsSlice = createSlice({
 export const { addPlants, deletePlant,setLoading } = plantsSlice.actions;
 
 export const deletePlantAsync =
-  (plantId: number) => async (dispatch: AppDispatch) => {
+  (plantId: number, onFinish : () => void) => async (dispatch: AppDispatch) => {
     try {
       await api.delete(`plants/${plantId}`);
 
       dispatch(deletePlant({ plantId }));
+
+      onFinish()
     } catch (error) {
       console.log(error);
     } finally {

@@ -25,10 +25,26 @@ export const plantsSlice = createSlice({
     addPlants: (state, action: PayloadAction<Plant[]>) => {
       state.plants = action.payload;
     },
+    deletePlant: (state, action: PayloadAction<{ plantId: number }>) => {
+      state.plants = state.plants.filter(
+        (p) => p.id !== action.payload.plantId
+      );
+    },
   },
 });
 
-export const { addPlants } = plantsSlice.actions;
+export const { addPlants, deletePlant } = plantsSlice.actions;
+export const deletePlantAsync =
+  (plantId: number) => async (dispatch: AppDispatch) => {
+    try {
+      await api.delete(`plants/${plantId}`);
+
+      dispatch(deletePlant({ plantId }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
 
 export const getPlantsAsync = () => async (dispatch: AppDispatch) => {
   try {

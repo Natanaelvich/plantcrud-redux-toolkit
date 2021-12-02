@@ -14,9 +14,7 @@ const ModalPlant: React.FC<Props> = ({ handleClose, plant }) => {
   const dispatch = useDispatch();
 
   function handleDeletePlant() {
-    dispatch(deletePlantAsync(plant.id));
-
-    handleClose();
+    dispatch(deletePlantAsync(plant.id,handleClose));
   }
 
   return (

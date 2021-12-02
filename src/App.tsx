@@ -10,7 +10,7 @@ import {
 } from "./store/slices/plantsSlice";
 
 function App() {
-  const plants = useSelector(selectPlants);
+  const {plants} = useSelector(selectPlants);
   const dispatch = useDispatch();
 
   const [showModalPlant, setShowModalPlant] = useState(false);

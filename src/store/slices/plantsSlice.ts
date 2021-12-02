@@ -32,25 +32,27 @@ export const plantsSlice = createSlice({
         (p) => p.id !== action.payload.plantId
       );
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoadingDelete: (state, action: PayloadAction<boolean>) => {
       state.loadingDelete = action.payload;
     },
   },
 });
 
-export const { addPlants, deletePlant,setLoading } = plantsSlice.actions;
+export const { addPlants, deletePlant,setLoadingDelete } = plantsSlice.actions;
 
 export const deletePlantAsync =
   (plantId: number, onFinish : () => void) => async (dispatch: AppDispatch) => {
     try {
-      await api.delete(`plants/${plantId}`);
-
-      dispatch(deletePlant({ plantId }));
-
-      onFinish()
+        dispatch(setLoadingDelete(true))
+        await api.delete(`plants/${plantId}`);
+        
+        dispatch(deletePlant({ plantId }));
+        
+        onFinish()
     } catch (error) {
-      console.log(error);
+        console.log(error);
     } finally {
+        dispatch(setLoadingDelete(false))
     }
   };
 

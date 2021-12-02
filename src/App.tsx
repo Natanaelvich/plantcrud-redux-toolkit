@@ -37,6 +37,7 @@ function App() {
             <button
               className={styles.listPlants}
               onClick={() => handleOpenModalPlant(p)}
+              key={p.id}
             >
               <img src={p.photo} alt="photo-plant" />
               <strong>{p.name}</strong>

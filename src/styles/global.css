@@ -10,6 +10,12 @@
 #root{
     background: rgb(41,46,42);
     background: linear-gradient(173deg, rgba(41,46,42,1) 0%, rgba(139,184,142,1) 35%, rgba(31,125,39,1) 100%);
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+body,hmtl {
+    height: 100%;
 }
 
 button{

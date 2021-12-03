@@ -13,11 +13,13 @@ export type Plant = {
 export interface plantsState {
   plants: Plant[];
   loadingDelete: boolean;
+  loadingGet: boolean;
 }
 
 const initialState: plantsState = {
   plants: [],
   loadingDelete: false,
+  loadingGet: false,
 };
 
 export const plantsSlice = createSlice({
@@ -35,34 +37,41 @@ export const plantsSlice = createSlice({
     setLoadingDelete: (state, action: PayloadAction<boolean>) => {
       state.loadingDelete = action.payload;
     },
+    setLoadingGet: (state, action: PayloadAction<boolean>) => {
+      state.loadingGet = action.payload;
+    },
   },
 });
 
-export const { addPlants, deletePlant,setLoadingDelete } = plantsSlice.actions;
+export const { addPlants, deletePlant, setLoadingDelete, setLoadingGet } =
+  plantsSlice.actions;
 
 export const deletePlantAsync =
-  (plantId: number, onFinish : () => void) => async (dispatch: AppDispatch) => {
+  (plantId: number, onFinish: () => void) => async (dispatch: AppDispatch) => {
     try {
-        dispatch(setLoadingDelete(true))
-        await api.delete(`plants/${plantId}`);
-        
-        dispatch(deletePlant({ plantId }));
-        
-        onFinish()
+      dispatch(setLoadingDelete(true));
+      await api.delete(`plants/${plantId}`);
+
+      dispatch(deletePlant({ plantId }));
+
+      onFinish();
     } catch (error) {
-        console.log(error);
+      console.log(error);
     } finally {
-        dispatch(setLoadingDelete(false))
+      dispatch(setLoadingDelete(false));
     }
   };
 
 export const getPlantsAsync = () => async (dispatch: AppDispatch) => {
   try {
+    dispatch(setLoadingGet(true));
     const response = await api.get("plants");
 
     dispatch(addPlants(response.data));
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(setLoadingGet(false));
   }
 };
 

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./App.module.scss";
 import ModalPlant from "./components/ModalPlant";
+import MyLoader from "./components/MyLoader";
 import {
   getPlantsAsync,
   Plant,
@@ -10,7 +11,7 @@ import {
 } from "./store/slices/plantsSlice";
 
 function App() {
-  const {plants} = useSelector(selectPlants);
+  const { plants, loadingGet } = useSelector(selectPlants);
   const dispatch = useDispatch();
 
   const [showModalPlant, setShowModalPlant] = useState(false);
@@ -32,19 +33,23 @@ function App() {
 
         <p>Selecione a planta que deseja atualizar.</p>
 
-        <div className={styles.wrapperList}>
-          {plants.map((p) => (
-            <button
-              className={styles.listPlants}
-              onClick={() => handleOpenModalPlant(p)}
-              key={p.id}
-            >
-              <img src={p.photo} alt="photo-plant" />
-              <strong>{p.name}</strong>
-              <p>{p.about}</p>
-            </button>
-          ))}
-        </div>
+        {loadingGet ? (
+          <MyLoader />
+        ) : (
+          <div className={styles.wrapperList}>
+            {plants.map((p) => (
+              <button
+                className={styles.listPlants}
+                onClick={() => handleOpenModalPlant(p)}
+                key={p.id}
+              >
+                <img src={p.photo} alt="photo-plant" />
+                <strong>{p.name}</strong>
+                <p>{p.about}</p>
+              </button>
+            ))}
+          </div>
+        )}
       </main>
 
       {showModalPlant && !!plantSelected && (

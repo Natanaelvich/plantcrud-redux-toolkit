@@ -4,6 +4,8 @@
   margin: 0 auto;
   padding-top: 24px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     margin-bottom: 12px;
@@ -44,6 +46,17 @@
   }
 }
 
+@keyframes fade-out-fwd {
+  0% {
+    transform: translateZ(80px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
 .wrapperList {
   display: inline-flex;
   flex-wrap: wrap;
@@ -51,4 +64,6 @@
 
   margin-top: 34px;
   padding-bottom: 140px;
+
+  animation: fade-out-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }

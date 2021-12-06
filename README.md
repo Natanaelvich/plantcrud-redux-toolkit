@@ -17,7 +17,8 @@ A implementation example redux toolkit in react.
 ## 🖼 GIF
 
 <p align='center'>
-<img src='' />
+<img src='https://user-images.githubusercontent.com/52014318/144775522-46774a85-92b8-4621-a028-c901962abafb.gif' />
+
 </p>
 
 ## ✨ Technologies!

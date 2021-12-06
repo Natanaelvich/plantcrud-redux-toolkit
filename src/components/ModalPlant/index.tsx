@@ -87,7 +87,7 @@ const ModalPlant: React.FC<Props> = ({ handleClose, plant }) => {
                 <MdEdit />
               </button>
               <button onClick={handleDeletePlant}>
-                {!loadingDelete ? <LoadingCircle /> : <MdDelete />}
+                {loadingDelete ? <LoadingCircle /> : <MdDelete />}
               </button>
             </>
           )}
